@@ -142,7 +142,12 @@ const cluster = require('cluster');
 testCpuNum = async () => {
     const numCPUs = require('os').cpus().length;
     console.log(numCPUs) 
-    
+
 }
 
-testCpuNum()
+// testCpuNum()
+
+
+let aaa = {"type": "print", "msg_id": 107, "content": {"day": "2020-03-25", "time": "18:09:40", "table": "B1", "dishes": [{"name": "生扣鲜鹅肠", "amount": 3}], "shop_name": "深圳拈江湖", "user_name": "Caizhiwei", "user_amount": 1}, "printer_key": "00:47:50:4E:B1:3E", "printer_type": "kitchen"}
+
+console.log(aaa.content)

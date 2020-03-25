@@ -35,12 +35,13 @@ const amqpConnect = async ()=>{
                     await updataServer.printStatus(handleData.msg_id,true)
                     //确认ACK
                     console.log(" siyu_order 确认ACK ");
-                    channel.ack(msg);
+                    
                 }else{
                     
                     await updataServer.printStatus(handleData.msg_id,false)
                     console.log(" siyu_order 打印出错 ");
                 }
+                channel.ack(msg);
                 // console.log("测试环境全部确认ack");
                 // channel.ack(msg);
             }, {

@@ -57,6 +57,7 @@ const pointLocationNum = (str,num) => {
 
 exports.testPrint = async (ip,content)=>{
   let pingPortRe = await searchPrint.pingPort(ip)
+  console.log('testPrint pingPortRe- ',pingPortRe)
   if(pingPortRe === false){
     return false
   }
@@ -79,7 +80,7 @@ exports.testPrint = async (ip,content)=>{
         printer.text(' ')
         printer.cut()
         printer.close();
-        console.log('执行的第几次end',content)
+        // console.log('执行的第几次end',content)
         resolve(true);
       });
     } catch (error) {
@@ -95,6 +96,7 @@ exports.testPrint = async (ip,content)=>{
 
 exports.allPrint = async (ip,content)=>{
   let pingPortRe = await searchPrint.pingPort(ip)
+  console.log('allPrint pingPortRe- ',pingPortRe)
   if(pingPortRe === false){
     return false
   }
@@ -163,7 +165,9 @@ exports.allPrint = async (ip,content)=>{
 
 
 exports.kitchenPrint = async (ip,content)=>{
+  
   let pingPortRe = await searchPrint.pingPort(ip)
+  console.log('kitchenPrint pingPortRe- ',pingPortRe)
   if(pingPortRe === false){
     return false
   }

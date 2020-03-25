@@ -56,51 +56,42 @@ let testAllPrint = {
 
 exports.handleAmqpPrint= async (data) => {
     let handleData = JSON.parse(data)
-    console.log('handleAmqpPrint js',handleData.type)
-    switch (handleData.type) {
-        case 'test':
-            let ip =  await printUtil.macToIp(handleData.printer_key)
-            // let testP = await print.testPrint(ip,testAllPrint.content)
-
-            // console.log('test',ip)
-        break;
-        case 'print':
-            let ipa =  await printUtil.macToIp(handleData.printer_key)
-            if(ipa === false){
-                return false
-            }
-            // print.testPrint(ipa)
-            console.log('print',ipa)
-            try {
-                if(handleData.printer_type === 'test'){
-                    let testP = await print.testPrint(ipa,testAllPrint.content)
+    let ipa =  await printUtil.macToIp(handleData.printer_key)
+    console.log('handleAmqpPrint js',handleData.type,'ip:',ipa)
     
-                    if(testP === false){
-                        return false
-                    }
-                    console.log('print_test',testP)
-                }
-                if(handleData.printer_type === 'all'){
-                    let allP = await print.allPrint(ipa,handleData.content)
-                    if(allP === false){
-                        return false
-                    }
-                    console.log('print_all',allP)
-                }
-                if(handleData.printer_type === 'kitchen'){
-                    let kitchenP = await print.kitchenPrint(ipa,handleData.content)
-                    if(kitchenP === false){
-                        return false
-                    }
-                    console.log('print_kitchen',kitchenP)
-                }
-            } catch (error) {
-                console.log('handle error')
+    if(ipa === false){
+        return false
+    }
+
+    try {
+        if(handleData.printer_type === 'test'){
+            let testP = await print.testPrint(ipa,testAllPrint.content)
+            console.log('print_test',testP)
+            if(testP === false){
                 return false
             }
-            return true
-            // console.log('print',ip)
-        break;
+            
+        }
+        if(handleData.printer_type === 'all'){
+            let allP = await print.allPrint(ipa,handleData.content)
+            console.log('print_all',allP)
+            if(allP === false){
+                return false
+            }
+            
+        }
+        if(handleData.printer_type === 'kitchen'){
+            let kitchenP = await print.kitchenPrint(ipa,handleData.content)
+            console.log('print_kitchen',kitchenP)
+            if(kitchenP === false){
+                return false
+            }
+            
+        }
+        return true
+    } catch (error) {
+        console.log('handle error')
+        return false
     }
 }
 exports.handleAmqpAssist = async (data) =>{
