@@ -28,6 +28,7 @@ const amqpConnect = async ()=>{
             });
             channel.bindQueue(queue, exchange, queue);
             console.log(" [*] queue siyu_order_assist succeed", queue);
+            channel.prefetch(100);
             channel.consume(queue,async function (msg) {
                 console.log(" [x] siyu_order_assist %s", msg.content.toString());
                 let re = await handelMsg.handleAmqpAssist(msg.content)

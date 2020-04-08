@@ -27,8 +27,10 @@ const amqpConnect = async ()=>{
             });
             channel.bindQueue(queue, exchange, queue);
             console.log(" [*] queue siyu_order succeed", queue);
+            channel.prefetch(100);
             channel.consume(queue,async function (msg) {
                 console.log(" [x] siyu_order %s", msg.content.toString());
+                
                 let handleData = JSON.parse(msg.content)
                 let re = await handelMsg.handleAmqpPrint(msg.content)
                 if(re) {

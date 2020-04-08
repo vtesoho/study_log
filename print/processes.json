@@ -11,7 +11,7 @@
    "instances": 1,
    "min_uptime": "200s",
    "max_restarts": 0,
-   "max_memory_restart": "80M",
+   "max_memory_restart": "280M",
    "cron_restart": "1 0 * * *",
    "watch": false,
    "merge_logs": true,

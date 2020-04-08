@@ -62,26 +62,39 @@ exports.handleAmqpPrint= async (data) => {
     if(ipa === false){
         return false
     }
-
+    
     try {
         if(handleData.printer_type === 'test'){
-            let testP = await print.testPrint(ipa,testAllPrint.content)
+            let testP = await print.testPrint(ipa,testAllPrint)
             console.log('print_test',testP)
             if(testP === false){
                 return false
             }
             
         }
+        if(handleData.printer_type === 'prepay'){
+            let allP = await print.prepayPrint(ipa,handleData)
+            console.log('print_prepay',allP)
+            if(allP === false){
+                return false
+            }
+        }
+        if(handleData.printer_type === 'has_pay'){
+            let allP = await print.hasPayPrint(ipa,handleData)
+            console.log('print_has_pay',allP)
+            if(allP === false){
+                return false
+            }
+        }
         if(handleData.printer_type === 'all'){
-            let allP = await print.allPrint(ipa,handleData.content)
+            let allP = await print.allPrint(ipa,handleData)
             console.log('print_all',allP)
             if(allP === false){
                 return false
             }
-            
         }
         if(handleData.printer_type === 'kitchen'){
-            let kitchenP = await print.kitchenPrint(ipa,handleData.content)
+            let kitchenP = await print.kitchenPrint(ipa,handleData)
             console.log('print_kitchen',kitchenP)
             if(kitchenP === false){
                 return false
