@@ -13,3 +13,23 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 yum install -y docker-ce
 ```
 
+
+
+
+### docker 导出容器
+```
+docker export ***.tar [容器名]
+```
+
+### docker 导入镜像
+```
+docker import ***.tar [镜像名]:[版本名]
+```
+
+### docker 运行镜像
+
+--name [要设置容器名]
+-itd --restart=always 
+```
+docker run [镜像名]:[版本名]
+```
