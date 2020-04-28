@@ -8,7 +8,7 @@
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const jsonWrite = require('./printUtil')
-
+const net = require('net');
 let process = require('child_process');
 // process.exec('nmap -sn 192.168.1.1-254',function(err,str1,str2) {
   
@@ -30,6 +30,7 @@ let process = require('child_process');
 //搜索本地并上报给服务器
 exports.Start = async() =>{
   let iptext = await getIp();
+  console.log('iptext',iptext)
   const { stdout, stderr } = await exec(iptext)
   // console.log(stdout)
   if(stderr){
@@ -45,7 +46,7 @@ exports.Start = async() =>{
 //获取当前ip
 async function getIp(){
   const { stdout, stderr } = await exec(`ifconfig eth0|grep "inet "|awk '{print $2}'`)
-  
+  console.log('ip',ip)
   if(stderr){
     // console.log('stderr:', stderr);
     return
@@ -132,30 +133,76 @@ async function IPSearchMac(ip){
 }
 
 
+//检查打印机状态
+async function checkPrintStatus (ip) {
+  return new Promise(
+      (resolve,reject) => {
+          let client = net.createConnection({port:4000,host:ip},()=>{
+              client.write('\x1b\x76');
+          })
+          client.on('data', (data) => {
+              console.log(data)
+              let re = JSON.stringify(data);
+              let obj = JSON.parse(re)
+              console.log('obj',obj)
+              if(obj.data[0] === 20 && obj.data[1] === 0 && obj.data[2] === 0 && obj.data[3] === 15){
+                  resolve(true)
+                  // console.log('打印机正常');
+              }else{
+                  resolve(false)
+                  // console.log('打印机异常');
+              }
+              console.log(obj);
+              client.end();
+          });
+          client.on('end', () => {
+              // console.log('已从服务器断开');
+          });
+      }
+  )
+}
+
+// console.log(checkPrintStatus('192.168.137.243'))
+
 exports.pingPort = async(ip)=>{
-  // return isPortHandle(ip)
-  const { stdout, stderr } = await exec(`nmap -p 9100 ${ip}`)
-  if(isPortHandle(stdout)){
-    console.log('pingPort true')
-    return true
-  }else{
-    return false
-  }
-  // await process.exec(`nmap -p 9100 ${ip}`,function(err,str1,str2) {
-  //   if(err){
-  //     console.log('端口没开')
+  console.log('pingPort','ip',ip)
+  return new Promise(
+    (resolve,reject) => {
+        try {
+          let client = net.createConnection({port:4000,host:ip},()=>{
+              client.write('\x1b\x76');
+          })
+          client.on('data', (data) => {
+              let re = JSON.stringify(data);
+              let obj = JSON.parse(re)
+              console.log('obj',obj)
+              if(obj.data[0] === 20 && obj.data[1] === 0 && obj.data[2] === 0 && obj.data[3] === 15){
+                  resolve(true)
+                  // console.log('打印机正常');
+              }else{
+                  resolve(false)
+                  // console.log('打印机异常');
+              }
+              console.log(obj);
+              client.end();
+          });
+          client.on('end', () => {
+              // console.log('已从服务器断开');
+          });
+        } catch (error) {
+          resolve(false)
+        }
+    }
+  )
+  // try {
+      
+      
+      
+  // } catch (error) {
+  //     console.log('checkPrintStatus catch')
   //     return false
-  //   }
-
-  //   if(isPortHandle(str1)){
-  //     return true
-  //   }else{
-  //     return false
-  //   }
-
-    // console.log('端口开了',item)
-    // printList.push (item)
-  // })
+  // }
+ 
 }
 
 
