@@ -7,7 +7,18 @@
 </head>
 <body>
     <?php
-        echo '浮点型'
+        $floatA = 10.03;
+        echo $floatA;
+        var_dump($floatA);
+        echo '<hr />';
+
+
+        //如果小数位是0,不会显示出来
+        $floatB = -9910.00;
+        echo number_format($floatB,2,'.', '');
+        var_dump($floatB);
+        echo '<hr />';
+
     ?>
 </body>
 </html>

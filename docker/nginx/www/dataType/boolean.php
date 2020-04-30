@@ -9,6 +9,21 @@
     <?php
         $x = true;
         var_dump($x);
+        echo $x;
+        if($x !== false){
+            echo 'true';
+        }
+        echo '<hr>';
+
+        $a = false;
+        var_dump($a);
+        echo '|'.$a.'|';
+        if($a === false){
+            echo 'false';
+        }
+        if($a !== false){
+            echo 'true';
+        }
         echo '<hr>';
     ?>
 </body>
