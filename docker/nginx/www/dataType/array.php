@@ -54,18 +54,63 @@
 
 
         echo '<hr />';
-        echo '执行这里start <br />';
+        // 5.4 之后可以直接用返回数组的下标
         function getArray() {
-            echo '执行这里getArray <br />';
             return array(1,2,3);
         }
         
         $arrarE = getArray()[1];
 
         var_dump($arrarE);
-        echo '执行这里end <br />';
 
 
     ?>
+
+
+    <h4>is_array 判断是否是数组</h4>
+    <?php
+        $is_array = [1,2,3];
+        var_dump(is_array($is_array));
+    ?>
+
+
+    <h4>explode 字符串分隔成数组</h4>
+    <?php
+        $str = 'explodeA explodeB explodeC explodeD explodeE';
+        $explode_arrA = explode(' ',$str);
+        var_dump($explode_arrA);
+        echo "<br />";
+        
+        $explode_arrB = explode(' ',$str,2);
+        echo "<br /> explode(' ',str,2)";
+        var_dump($explode_arrB);
+
+        $explode_arrC = explode(' ',$str,-2);
+        echo "<br />explode(' ',str,-2)";
+        var_dump($explode_arrC);
+    ?>
+
+
+    <h4>array_change_key_case 将数组中的所有键名修改为全大写或小写</h4>
+    <?php
+        $arrayG = [
+            "keyA" => "valueA",
+            "keyB" => "valueB",
+            "keyC" => "valueC",
+        ];
+
+        var_dump(array_change_key_case($arrayG,CASE_UPPER));
+
+        var_dump(array_change_key_case($arrayG));
+    ?>
+
+    <h4>array_chunk 将一个数组分割成多个</h4>
+    <?php
+        $input_array = array('a', 'b', 'c', 'd', 'e');
+        print_r(array_chunk($input_array, 2));
+        print_r(array_chunk($input_array, 2, true));
+    ?>
+
+
 </body>
 </html>
