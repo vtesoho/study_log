@@ -4,10 +4,21 @@ var amqp = require('amqplib/callback_api');
 const updataServer = require("./server")
 let handelMsg = require('./handle')
 
-const opt = {credentials: require('amqplib').credentials.plain('shop_1', '123456')};
+
 
 const amqpConnect = async ()=>{
-    amqp.connect('amqp://106.52.26.252/%2Fshop_1?heartbeat=3', opt, function (error0, connection) {
+    let config = {}
+    try {
+        config = await updataServer.getConfig()
+        // console.log('config',config)
+        if(!config){
+            throw new Error('读取配置错误A');
+        }
+    } catch (error) {
+        throw new Error('读取配置错误B');
+    }
+    const opt = {credentials: require('amqplib').credentials.plain(config['user'], config['pass'])};
+    amqp.connect(config['connect'], opt, function (error0, connection) {
         if (error0) {
             throw new Error('lalal');
         }
@@ -21,7 +32,7 @@ const amqpConnect = async ()=>{
             channel.assertExchange(exchange, 'direct', {
                 durable: true
             });
-            var queue = 'siyu_order';
+            var queue = config['queue'];
             channel.assertQueue(queue, {
                 durable: true
             });

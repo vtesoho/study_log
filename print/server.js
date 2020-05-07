@@ -175,3 +175,61 @@ exports.printStatus = async (id,status) => {
         return false
     }
 }
+
+
+//根据唯一id读取线上配置
+exports.getConfig = async (shop_id) => {
+    let config = {}
+    try {
+        config = await require('./config');    
+    } catch (error) {
+        return false
+    }
+    
+    var url="http://debug-siyu.shuachi.com/v1/printer/config";
+    var requestData={
+        shop_id:config['id']
+    };
+    let updata = new Promise(async (resolve, reject) => {
+        await request({
+            url: url,
+            method: "GET",
+            json: true,
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+            },
+            body: requestData
+        }, function(error, response, body) {
+            // console.log(response.request)
+            if(error){
+                reject('request error')
+            }
+            // console.log(error)
+            // console.log(body)
+            if (!error && response.statusCode == 200) {
+                // console.log(body) // 请求成功的处理逻辑
+                if(body.code === 1){
+                    // console.log(true)
+                    resolve(body.data)
+                }else{
+                    // console.log(false)
+                    reject(false)
+                }
+                
+            }else{
+                reject(false)
+            }
+        });
+    }).catch(()=> {
+        return false
+    })
+
+    let updataRe = await updata
+    if(updataRe){
+        return updataRe
+    }else{
+        return false
+    }
+}
+
+
