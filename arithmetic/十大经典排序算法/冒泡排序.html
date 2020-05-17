@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冒泡排序</title>
+</head>
+<body>
+    <script>
+        let arr = [9,8,7,6,6,5,4,3,2,1];
+
+        //基础版本
+        //循环次数是100
+        function bubbleSort(arr) {
+            let len = arr.length
+            let forNum = 0;
+            for (let i = 0; i < len; i++) {
+                console.log('i',i,' -------------- start -------')
+                for (let a = 0; a < len; a++) {
+                    // console.log('a',a)
+                    if(arr[a] > arr[a+1]){
+                        let temp = arr[a+1]
+                        arr[a+1] = arr[a]
+                        arr[a] = temp
+                    }
+                    forNum++;
+                }
+                console.log('i',i,' -------------- end ----------')
+            }
+            console.log('forNum',forNum)
+            return arr
+        }
+        let sortAfterArr = bubbleSort(arr)
+        console.log(sortAfterArr)
+
+
+        //改进版本 
+        //在第二次循环的次数上，减去了第一层的i
+        function bubbleSortA(arr) {
+            let len = arr.length
+            let forNum = 0;
+            for (let i = 0; i < len; i++) {
+                console.log('i',i,' -------------- start -------')
+                for (let a = 0; a < len - i; a++) {
+                    // console.log('a',a)
+                    if(arr[a] > arr[a+1]){
+                        let temp = arr[a+1]
+                        arr[a+1] = arr[a]
+                        arr[a] = temp
+                    }
+                    forNum++;
+                }
+                console.log('i',i,' -------------- end ----------')
+            }
+            console.log('改进版本 forNum',forNum)
+            return arr
+        }
+        let sortAfterArrA = bubbleSortA(arr)
+        console.log(sortAfterArrA)
+    </script>
+</body>
+</html>
