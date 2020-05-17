@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二重循环简化</title>
+</head>
+<body>
+    <script>
+
+        function sumA (m,n){
+        　　 let num = Math.floor(Math.random()*(m - n) + n);
+            return num;
+        }
+        
+        let arrA = [];
+        //生成一个M*N的数组，并保证里面随机只有一个字母等于Q
+        let M = sumA(9000,10000);
+        let N = sumA(9000,10000);
+        let originM = M;
+        let originN = N;
+        let arrB = [];
+        console.log('M',M,'N',N)
+        for (let i = 0; i < M; M--) {
+            arrB = [];
+            for (let a = 0; a < N; N--) {
+                arrB.push('A');
+            }
+            N = originN
+            arrA.push(arrB);
+        }
+        //数组最后一位写入Q
+        arrA[originM-1][originN-1] = 'Q';
+        // console.log('arrA',arrA)
+
+
+
+
+
+
+        //例如要查找等于『Q』的字母
+
+
+        //常规操作
+        var planA_time_start = new Date().getTime();
+        arrA.map((itemA) => {
+            itemA.map((itemB) => {
+                if(itemB === 'Q'){
+                    console.log('planA 找到了 %s',itemB)
+                }
+            })
+        })
+        var planA_time_end = new Date().getTime();
+        console.log('planA run time %s',planA_time_end - planA_time_start)
+        var planB_time_start = new Date().getTime();
+        let row = 0;
+        let col = 0;
+        for (let i = 1; i < (originM*originN); i++) {
+            row = parseInt(i / originN)
+            col = i % originN
+            // console.log('row',row,'col',col)
+            if(arrA[row][col] === 'Q'){
+                console.log('planB 找到了 Q %s %s',row,col)
+            }
+        }
+        var planB_time_end = new Date().getTime();
+        console.log('planB run time %s',planB_time_end - planB_time_start)
+
+        
+        
+    </script>
+    
+</body>
+</html>
