@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择排序</title>
+</head>
+<body>
+    <script>
+        // let arr = [9,8,7,6,6,5,4,3,2,1];
+        let arr = [9,8,7,6,6,5,4,4,2,10,12,18];
+        let forNum = 0;
+        for(let i = 0;i<arr.length;i++){
+            let minIndex = 0
+            for(let j = i+1;j<arr.length;j++){
+                if(arr[i] > arr[j]){
+                    minIndex = j
+                }
+                forNum++;
+            }
+            console.log(minIndex)
+            if(minIndex !== 0){
+                let temp = arr[i];
+                arr[i] = arr[minIndex];
+                arr[minIndex] = temp;
+            }
+        }
+        console.log(arr)
+        console.log('forNum',forNum)
+    </script>
+</body>
+</html>
