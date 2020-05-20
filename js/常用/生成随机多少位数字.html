@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>生成随机多少位数字</title>
+</head>
+<body>
+    <script>
+        function createUserNumber(num){
+            let ary = '';
+            for(var i=0; i<num; i++){
+                ary += parseInt((Math.random() * 10));
+            }
+            if(ary.substring(0,1) === '0'){
+                
+                ary = createUserNumber()
+            }
+            // console.log()
+            return ary;
+        }
+        // console.log(createUserNumber(1))
+        console.log(Math.max(parseInt(Math.random() * 10),1))
+    </script>
+</body>
+</html>
