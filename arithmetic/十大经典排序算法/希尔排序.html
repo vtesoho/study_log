@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>希尔排序</title>
+</head>
+<body>
+    <script>
+        let arr = [20,9,8,17,6,6,5,4,4,2,10,12,18];
+        let len = arr.length
+        for (let i = Math.floor(len /2); i > 0; i = Math.floor(i / 2)) {
+            console.log('i',i)
+            for (let a = i; a < len; a++) {
+                console.log('a',a)
+                for (let b = a - i; b >= 0 && arr[b] > arr[i + b]; b-=i) {
+                    var temp = arr[b]
+                    arr[b] = arr[i + b]
+                    arr[b + i] = temp
+                    console.log(arr)
+                }
+            }
+            
+            // const element = array[i];
+            
+        }
+    </script>
+</body>
+</html>
