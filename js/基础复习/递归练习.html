@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>递归练习</title>
+</head>
+<body>
+    <script>
+        //5的阶乘
+        function factorial(n) {
+            if(n == 1){
+                return 1
+            }
+            return n * factorial(n-1)
+        }
+        console.log(factorial(4))
+
+        //利用递归求1-100的和
+        function factorialA(n){
+            if(n === 1){
+                return 1
+            } 
+            return n + factorialA(n-1)
+        }
+        console.log(factorialA(100))
+    </script>
+</body>
+</html>
