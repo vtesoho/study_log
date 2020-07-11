@@ -9,3 +9,6 @@ DDL: create drop alter, 对表结构 的增删改。
 TCL: commit 提交事务，rollback回滚事务。(TCL中的T是Transaction)
 
 DCL: grant授权，revoke撤销权限等。
+
+
+
