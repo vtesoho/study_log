@@ -17,6 +17,8 @@ Metadata不可少
 
 
 ### RUN
+执行命令并创建新的image layer
+
 为了美观，复杂的run用反斜线换行，避免无用的分层，合并多条命令成一行！
 ```
 RUN yum dpdate && yum install -y vim \
@@ -67,6 +69,20 @@ RUN apt-get install -y mysql-server = "${MYSQL_VERSION}"  #引用常量
 
 
 ### CMD
+```
+设置容器启动后默认执行的命令和参数
 
+如果docker run 指定了其它命令，CMD命令被忽略
+
+如果定义了多个CMD，只有最后一个会执行
+```
 
 ### ENTRYPOINT
+设置容器启动时运行的命令
+```
+让容器以应用程序或者服务的形式运行
+
+不会被忽略，一定会执行
+
+
+```
