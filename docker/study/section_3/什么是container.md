@@ -16,3 +16,10 @@ docker rm $(docker container ls -aq)
 ```
 docker container ls -f "status=exited" -q
 ```
+
+## 把一个container转换成一个image
+```
+docker commit [container名] [image名]
+```
+
+##
