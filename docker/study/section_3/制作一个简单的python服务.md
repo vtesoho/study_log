@@ -25,6 +25,8 @@ CMD ["python", "app.py"]
 
 开始build Dockerfile文件
 ```
+//进入Dockerfile目录下
+docker build -t vteso/flask-hello-world .
 ```
 
 
