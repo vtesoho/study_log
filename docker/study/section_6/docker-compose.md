@@ -46,9 +46,25 @@ services:
       - my-bridge
   
 volumes:
-  mysql-data
+  mysql-data:
 
 networks:
   my-bridge:
     driver: bridge
+```
+
+
+## 一些简单的docker-compose 命令
+```
+启动一个编写好的docker-compose文件
+docker-compose up //在当前目录的情况下，如果文件名不叫docker-compose.yml，则需加-f [文件名] 来运行
+
+//查看所运行的情况
+docker-compose ps
+
+//查看docker-compose.yml所创建的images情况
+docker-compose images
+
+//进入docker-compose.yml所创建的容器，与docker exec一样
+docker-compose exec [容器名] bash
 ```

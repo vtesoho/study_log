@@ -22,7 +22,7 @@ services:
       - my-bridge
   
 volumes:
-  mysql-data
+  mysql-data:
 
 networks:
   my-bridge:
