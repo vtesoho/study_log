@@ -35,3 +35,16 @@ echo "testsecret" | docker secret create testsecret -
 
 例如创建mysql容器要设置密码的时候，就可以写上MYSQL_ROOT_PASSWORD_FILE=/run/secrets/[secret名]
 ```
+
+### 在yml文件使用需要注意的
+```
+可以在yml里面直接定义，
+secrets:
+    my-pw:
+        file: ./password
+使用时加上
+secrets:
+    - my-pw
+
+但这样会把密码暴露出来，最好的方式是先通过命令输入的方式去创建好，然后在使用。
+```
