@@ -6,6 +6,7 @@
 ```
 tar -xvf 'frp_0.34.0_linux_amd64.tar.gz'
 cd frp_0.34.0_linux_amd64/
+cp frps /usr/bin/
 mkdir /etc/frp/
 vim frps.ini
 ----------
