@@ -16,6 +16,11 @@ chmod 755 /etc/sysconfig/modules/ipvs.modules && bash /etc/sysconfig/modules/ipv
 
 ## 安装 Docker 软件
 
+如果是centos8，必需要安装containerd.io
+```
+yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm
+```
+
 ```shell
 yum install -y yum-utils device-mapper-persistent-data lvm2
 
