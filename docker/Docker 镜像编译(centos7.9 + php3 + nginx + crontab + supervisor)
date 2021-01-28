@@ -1,0 +1,279 @@
+
+# 该镜像解决ImageMagick lib库安装后处理图片异常问题
+# 注:  若基于该镜像部署环境，先部署在测试环境，测试以及验证功能模块lib库是否正常
+
+## 目录
+
+- nginx
+    - cong.d
+        - default.conf
+    - nginx.conf
+- Dockerfile
+- aliyun-epel.repo
+- aliyun-mirror.repo
+- entry_point.sh 
+- README.MD
+
+
+## 文件内容
+
+- default.conf
+
+    ```
+    server {
+        listen  80;
+        server_name  localhost;
+    
+        root   /var/www/html/public;
+        index  index.html index.htm index.php;
+    
+        location / {
+            if ($request_uri ~* "\.(flv|gif|jpe?g|png|ico|swf|js|css|pdf|otf|eot|svg|ttf|woff)(\?[0-9]+)?$") {
+                expires max;
+            }
+            include /var/www/html/_htaccess;
+            index  index.html index.php;
+        }
+    
+        location ~ \.php$ {
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param SCRIPT_NAME $fastcgi_script_name;
+            fastcgi_index index.php;
+            include fastcgi_params;
+         }
+         
+    }
+
+    ```
+
+- nginx.conf
+
+    ```
+    
+    user nginx;
+    worker_processes auto;
+    error_log /var/log/nginx/error.log;
+    pid /run/nginx.pid;
+    
+    include /usr/share/nginx/modules/*.conf;
+    
+    events {
+        worker_connections 1024;
+    }
+    
+    http {
+        log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                          '$status $body_bytes_sent "$http_referer" '
+                          '"$http_user_agent" "$http_x_forwarded_for"';
+    
+        access_log  /var/log/nginx/access.log  main;
+    
+        sendfile            on;
+        tcp_nopush          on;
+        tcp_nodelay         on;
+        keepalive_timeout   65;
+        types_hash_max_size 2048;
+    
+        include             /etc/nginx/mime.types;
+        default_type        application/octet-stream;
+    
+        include /etc/nginx/conf.d/*.conf;
+    }
+    
+    ```
+
+- aliyun-epel.repo
+
+    ```
+    [epel]
+    name=Extra Packages for Enterprise Linux 7 - $basearch
+    baseurl=http://mirrors.aliyun.com/epel/7/$basearch
+    #mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch
+    failovermethod=priority
+    enabled=1
+    gpgcheck=0
+    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+     
+    [epel-debuginfo]
+    name=Extra Packages for Enterprise Linux 7 - $basearch - Debug
+    baseurl=http://mirrors.aliyun.com/epel/7/$basearch/debug
+    #mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-7&arch=$basearch
+    failovermethod=priority
+    enabled=0
+    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+    gpgcheck=0
+     
+    [epel-source]
+    name=Extra Packages for Enterprise Linux 7 - $basearch - Source
+    baseurl=http://mirrors.aliyun.com/epel/7/SRPMS
+    #mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-7&arch=$basearch
+    failovermethod=priority
+    enabled=0
+    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+    gpgcheck=0
+    
+    ```
+
+- aliyun-mirror.repo
+
+    ```
+    # CentOS-Base.repo
+    #
+    # The mirror system uses the connecting IP address of the client and the
+    # update status of each mirror to pick mirrors that are updated to and
+    # geographically close to the client.  You should use this for CentOS updates
+    # unless you are manually picking other mirrors.
+    #
+    # If the mirrorlist= does not work for you, as a fall back you can try the 
+    # remarked out baseurl= line instead.
+    #
+    #
+     
+    [base]
+    name=CentOS-$releasever - Base - mirrors.aliyun.com
+    failovermethod=priority
+    baseurl=http://mirrors.aliyun.com/centos/$releasever/os/$basearch/
+    #mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os
+    gpgcheck=0
+    gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+     
+    #released updates 
+    [updates]
+    name=CentOS-$releasever - Updates - mirrors.aliyun.com
+    failovermethod=priority
+    baseurl=http://mirrors.aliyun.com/centos/$releasever/updates/$basearch/
+    #mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=updates
+    gpgcheck=0
+    gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+     
+    #additional packages that may be useful
+    [extras]
+    name=CentOS-$releasever - Extras - mirrors.aliyun.com
+    failovermethod=priority
+    baseurl=http://mirrors.aliyun.com/centos/$releasever/extras/$basearch/
+    #mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras
+    gpgcheck=0
+    gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+     
+    #additional packages that extend functionality of existing packages
+    [centosplus]
+    name=CentOS-$releasever - Plus - mirrors.aliyun.com
+    failovermethod=priority
+    baseurl=http://mirrors.aliyun.com/centos/$releasever/centosplus/$basearch/
+    #mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=centosplus
+    gpgcheck=0
+    enabled=0
+    gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+     
+    #contrib - packages by Centos Users
+    [contrib]
+    name=CentOS-$releasever - Contrib - mirrors.aliyun.com
+    failovermethod=priority
+    baseurl=http://mirrors.aliyun.com/centos/$releasever/contrib/$basearch/
+    #mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=contrib
+    gpgcheck=0
+    enabled=0
+    gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+    
+    ```
+
+- Dockerfile
+
+    ```
+    FROM centos:7.9.2009
+
+    LABEL author="young <yswhnsn@163.com>"
+    
+    USER root
+    
+    WORKDIR /var/www/html
+    
+    ENV TIMEZONE            Asia/Shanghai
+    
+    COPY aliyun-mirror.repo /etc/yum.repos.d/CentOS-Base.repo
+    COPY aliyun-epel.repo /etc/yum.repos.d/epel.repo
+    
+    # install php with lib
+    RUN yum install -y epel-release && yum clean all && yum makecache\
+    && ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && echo '$TIMEZONE' > /etc/timezone \
+    && yum provides '*/applydeltarpm' \
+    && yum -y install autoconf gcc librabbitmq hiredis-dev openssl openssl-devel libtool-ltdl-devel deltarpm curl-devel librabbitmq-devel libjpeg libjpeg-devel libpng libpng-devel ImageMagick-devel \
+    && yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.rpm \
+    && yum install -y --enablerepo=remi --enablerepo=remi-php73 php php-fpm php-common php-opcache php-devel php-fileinfo php-pcntl php-sockets php-zip php-posix php-curl php-dom php-gmp php-phar php-json php-intl php-mbstring php-mcrypt php-session php-ctype php-iconv  php-openssl php-tokenizer php-odbc php-pdo  php-pgsql php-gd php-xml php-pear php-bcmath php-pecl-swoole php-pecl-redis php-pecl-imagick --skip-broken \
+    && sed -i 's/memory_limit = 128M/memory_limit = 512M/g' /etc/php.ini \
+    && sed -i 's/;request_slowlog_timeout = 0/request_slowlog_timeout = 5s/g' /etc/php-fpm.d/www.conf \
+    # install nginx with add user
+    && yum install -y supervisor  \
+    && yum install -y crontabs \
+    && yum install -y nginx \
+    && groupadd www \
+    && useradd -g www -s /sbin/nologin www \
+    && yum remove -y ImageMagick-devel openssl-devel librabbitmq-devel libjpeg-devel libpng-devel \
+    && yum clean all  \
+    && rm -rf /var/cache/yum \
+    && rm -rf /var/tmp/*
+
+
+    COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+    COPY ./nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+    COPY entry_point.sh /mnt/entry_point.sh
+    
+    RUN mkdir -p /run/php-fpm && chmod -R 777 /run/php-fpm && chmod +x /mnt/entry_point.sh
+    
+    VOLUME ["/var/www/html","/etc/supervisord.d","/etc/nginx/conf.d","/var/log/nginx"]
+    
+    EXPOSE 80
+    
+    CMD ["/mnt/entry_point.sh"]
+    
+    ```
+
+- entry_point.sh
+
+    ```
+    #!/bin/sh
+    
+    php-fpm -D -R 
+    php artisan swoole_new start > /dev/null 2>&1 &
+    supervisord -c /etc/supervisord.conf
+    crond start > /dev/null 2>&1 &
+    crontab > /dev/null 2>&1 &
+    nginx # -g "daemon off;"
+    
+    tail -f > /dev/null
+    
+    ```
+
+
+## 构建和使用
+
+- 构建
+      
+    ```
+    docker build -t ydn_php_integration .
+
+    ```
+    
+- 存储数据路径说明
+
+    宿主路径(自定义) |容器路径 |使用
+    ---|---|---
+    /var/www/html | /var/www/html/ | 项目代码
+    /etc/supervisord.d| /etc/supervisord.d | 需守护脚本配置
+    /etc/nginx/conf.d | /etc/nginx/conf.d | nginx服务配置
+    /var/log/nginx| /var/log/nginx | nginx日志存储
+
+    
+-  运行容器服务
+
+    ```
+    docker run -d -p $port:80  --restart=always --privileged  --name $container_name \
+        -v $project_path:/var/www/html \
+        -v $supervisor_path:/etc/supervisord.d \
+        -v $nginx_config_path:/etc/nginx/conf.d \
+        -v $nginx_log_path:/var/log/nginx\
+        ydn_php_integration:latest
+
+    ```
