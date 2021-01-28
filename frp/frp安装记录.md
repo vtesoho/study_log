@@ -45,7 +45,7 @@ mkdir /etc/frp/
 vim frpc.ini
 ----------
 [common]
-server_addr = *.*.*.*
+server_addr = 172.81.247.123
 server_port = 5880
 token = jieguoweiwu
 [ssh]
@@ -72,5 +72,7 @@ remote_port = 6008
 
 ----------
 cp frpc.ini /etc/frp/
-
+cd systemd/ && cp frpc.service /usr/lib/systemd/system/
+systemctl enable frpc
+systemctl start frpc
 ```
