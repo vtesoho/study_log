@@ -78,3 +78,21 @@ docker run --name [容器名] -itd -v /Users/***/web/www:/usr/share/nginx/html:r
 
 windows或是liunx是可以桥接方式或是用net=host模式，共用宿主机的网卡。
 
+
+
+
+工具平台运行命令
+
+docker run --name ydn_tools_api -v /Users/liyiquan/Desktop/work/工具平台/web/www/ydntool:/var/www/html -d --privileged=true php:7.3.8-fpm
+
+docker run --name ydn_tools_sass -itd -v /Users/liyiquan/Desktop/work/工具平台/web/www/ydntool:/usr/share/nginx/html:ro -v /Users/liyiquan/Desktop/work/工具平台/nginx/conf.d:/etc/nginx/conf.d:ro -p 8092:80 --link ydn_tools_api:php  nginx
+
+
+
+pecl install redis-4.0.1 && docker-php-ext-enable redis
+
+
+apt-get update &&
+apt-get install -y --no-install-recommends libpq-dev &&
+rm -r /var/lib/apt/lists/* &&
+docker-php-ext-install -j$(nproc) pgsql pdo_pgsql
