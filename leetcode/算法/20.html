@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20. 有效的括号</title>
+    <script>
+        /**
+        * @param {string} s
+        * @return {boolean}
+        */
+
+        
+        var isValid = function(s) {
+            console.log(main(s));
+        };
+
+function main (s){
+    let ss = s.split('');
+    if(ss.length < 2){
+        return false
+    }
+    let stark = [];
+    for (let i = 0; i < ss.length; i++) {
+        const element = ss[i];
+        if(element === '[' || element === '(' || element === '{'){
+            controller(stark,1,element)
+        }
+        if(element === ']' || element === ')' || element === '}'){
+            if(!controller(stark,2,element)){
+                return false
+            }
+        }
+    }
+    if(stark.length !== 0){
+        return false
+    }
+    return true
+}
+
+function controller(stark,type,s){
+    if(type === 1){
+        stark.push(s)
+    }
+    if(type === 2){
+        if(stark[stark.length -1] === '[' && s === ']'){
+            stark.pop()
+            return true
+        }
+        if(stark[stark.length -1] === '(' && s === ')'){
+            stark.pop()
+            return true
+        }
+        if(stark[stark.length -1] === '{' && s === '}'){
+            stark.pop()
+            return true
+        }
+    }
+    return false
+}
+
+s = "()"
+this.isValid(s);
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
