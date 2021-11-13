@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>520. 检测大写字母</title>
+    <script>
+/**
+* @param {string} word
+* @return {boolean}
+*/
+var detectCapitalUse = function(word) {
+    // let arr = {
+    //     "A":'A',
+    //     "B":'B',
+    //     "C":'C',
+    //     "D":'D',
+    //     "E":'E',
+    //     "F":'F',
+    //     "G":'G',
+    // };
+    let dx = 0
+    let xx = 0
+    let oneDx = 0
+    for (let i = 0; i < word.length; i++) {
+        if(64 < word.charCodeAt(i) && word.charCodeAt(i) < 91){
+            if(i === 0){
+                oneDx++
+            }
+            dx++
+        }
+        if(96 < word.charCodeAt(i) && word.charCodeAt(i) < 123){
+            xx++
+        }
+    }
+
+    if(dx === word.length){
+        return true
+    }
+    if(xx === word.length){
+        return true
+    }
+    if(dx > 1){
+        return false
+    }
+    if(oneDx === 1){
+        return true
+    }
+    return false
+    console.log(word.length)
+    console.log(dx)
+    console.log(xx)
+    
+
+};
+
+// console.log(detectCapitalUse("FFFFFFFFFFFFFFFFFFFFf"))
+console.log(detectCapitalUse("Leetcode"))
+// console.log(detectCapitalUse("z"))
+// console.log(detectCapitalUse("ffffffffffffffffffffF"))
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
