@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+    let a = x.toString()
+    let arr = []
+    let cardinal = a.length % 2;
+    for (let i = 0; i < a.length; i++) {
+        // console.log(i,arr);
+        if(i < (Math.ceil(a.length / 2) - cardinal)){
+            arr.push(a.substring(i,i+1))
+        }
+        if(i >= (Math.ceil(a.length /2))){
+            if(arr.pop() !== a.substring(i,i+1)){
+                return false
+            }
+            // console.log('arr.pop()',arr.pop())
+            // console.log('a.substring(i,i+1)',a.substring(i,i+1))
+        }
+    }
+    return true
+}
+
+
+console.log(isPalindrome(121))
+console.log(isPalindrome(-12))
+console.log(isPalindrome(-121))
+console.log(isPalindrome(101))
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
