@@ -29,5 +29,13 @@ wkhtmltopdf -V
 wkhtmltopdf 0.12.6 (with patched qt)
 ```
 
+第五步
+中文不显示问题
+
+```
+把windows下的simsun.ttc复制到 centos7 /usr/share/fonts/目录下
+```
+
+
 
 
