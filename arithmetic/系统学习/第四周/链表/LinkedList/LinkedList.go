@@ -92,9 +92,38 @@ func (current *List) Add(index int, data Object) {
 }
 
 //删除指定元素
+func (current *List) Remove(data Object) {
+	preNode := current.headNode
+	if preNode.Data == data {
+		current.headNode = preNode.Next
+	} else {
+		for preNode.Next != nil {
+			if preNode.Next.Data == data {
+				preNode.Next = preNode.Next.Next
+			} else {
+				preNode = preNode.Next
+			}
+		}
+	}
+}
 
 //删除指定位置元素
 
 //查看是否包含某个元素
 
 //遍历所有元素
+
+//翻转链表
+func (current *Node) reverseList() *Node {
+	var pre *Node
+	cur := current
+	for cur != nil {
+		next := cur.Next
+		cur.Next = pre
+		pre = cur
+		cur = next
+
+	}
+	return pre
+
+}

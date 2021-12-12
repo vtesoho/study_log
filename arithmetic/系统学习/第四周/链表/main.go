@@ -22,6 +22,15 @@ func main() {
 	linked.GetSize()
 	linked.ToString()
 
+	linked.Remove("bb")
+
+	linked.GetSize()
+	linked.ToString()
+	linked.reverseList("bb")
+
+	linked.GetSize()
+	linked.ToString()
+
 	// fmt.Println("linked", )
 
 }
