@@ -114,16 +114,41 @@ func (current *List) Remove(data Object) {
 //遍历所有元素
 
 //翻转链表
-func (current *Node) reverseList() *Node {
+
+func ListAdd(head *Node, data Object) *Node {
+	newa := &Node{Data: data}
+	newa.Next = head
+	head = newa
+	return head
+}
+
+func ListPrint(head *Node) {
+	// cur := head
+	// fmt.Print(head.Data, "->")
+
+	// for cur.Next != nil {
+	// 	fmt.Println(cur.Data, "->")
+	// 	cur = head.Next
+	// }
+
+	cur := head
+	fmt.Print(cur.Data, "->")
+	for cur.Next != nil {
+		cur = cur.Next
+		fmt.Print(cur.Data, "->")
+	}
+	fmt.Println("nil")
+}
+
+func ReverseList(head *Node) {
 	var pre *Node
-	cur := current
+	cur := head
 	for cur != nil {
+		fmt.Println("cur.data", cur.Data)
 		next := cur.Next
 		cur.Next = pre
 		pre = cur
 		cur = next
-
 	}
-	return pre
 
 }
