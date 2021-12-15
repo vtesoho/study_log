@@ -2,6 +2,7 @@ package main
 
 import (
 	"arrayList/ArrayList"
+	"arrayList/StackArray"
 	"fmt"
 )
 
@@ -62,7 +63,7 @@ func main6() {
 	fmt.Println(list)
 }
 
-func main() {
+func main7() {
 	//定义接口对象，赋值的对象必须实现接口的所有方法
 	list := ArrayList.NewArrayList()
 
@@ -82,4 +83,17 @@ func main() {
 	fmt.Println(list)
 
 	// fmt.Println(list)
+}
+
+func main() {
+	myStack := StackArray.NewStack()
+	myStack.Push(1)
+	myStack.Push(2)
+	myStack.Push(3)
+	myStack.Push(4)
+	fmt.Println(myStack.Pop())
+	fmt.Println(myStack.Pop())
+	fmt.Println(myStack.Pop())
+	fmt.Println(myStack.Pop())
+	fmt.Println(myStack.Pop())
 }
