@@ -49,7 +49,7 @@ func main5() {
 	fmt.Println(list)
 }
 
-func main() {
+func main6() {
 	//定义接口对象，赋值的对象必须实现接口的所有方法
 	list := ArrayList.NewArrayList()
 
@@ -60,4 +60,26 @@ func main() {
 		list.Insert(1, "d5")
 	}
 	fmt.Println(list)
+}
+
+func main() {
+	//定义接口对象，赋值的对象必须实现接口的所有方法
+	list := ArrayList.NewArrayList()
+
+	list.Append("a1")
+	list.Append("b2")
+	list.Append("c3")
+	list.Append("d3")
+	list.Append("e3")
+
+	for it := list.Iterator(); it.HasNext(); {
+		item, _ := it.Next()
+		if item == "d3" {
+			it.Remove()
+		}
+		fmt.Println(item)
+	}
+	fmt.Println(list)
+
+	// fmt.Println(list)
 }
