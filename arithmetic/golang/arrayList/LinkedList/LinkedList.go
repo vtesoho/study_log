@@ -25,10 +25,8 @@ func NewLinkedList() *Node {
 	return node
 }
 
-func (node *Node) AddFirst(data interface{}) *Node {
+func (node *Node) AddFirst(data interface{}) {
 	fmt.Println("node", node)
-	newNode := new(Node)
-	newNode.Data = data
+	newNode := &Node{Data: data}
 	newNode.Next = node
-	return newNode
 }

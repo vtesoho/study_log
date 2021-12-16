@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func main11() {
 	myq := Queue.NewQueue()
 	myq.EnQueue(1)
 	myq.EnQueue(2)

@@ -2,6 +2,7 @@ package main
 
 import (
 	"arrayList/ArrayList"
+	"arrayList/LinkStack"
 	"arrayList/StackArray"
 	"fmt"
 )
@@ -96,4 +97,14 @@ func main8() {
 	fmt.Println(myStack.Pop())
 	fmt.Println(myStack.Pop())
 	fmt.Println(myStack.Pop())
+}
+
+func main() {
+	node1 := new(LinkStack.Node)
+	node1.Data = 1
+	node2 := new(LinkStack.Node)
+	node2.Data = 2
+	node2.Next = node1
+	fmt.Println(node1)
+	fmt.Println(node2)
 }
