@@ -85,7 +85,7 @@ func main7() {
 	// fmt.Println(list)
 }
 
-func main() {
+func main8() {
 	myStack := StackArray.NewStack()
 	myStack.Push(1)
 	myStack.Push(2)
