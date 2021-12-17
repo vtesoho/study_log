@@ -11,3 +11,9 @@ type LinkStack interface {
 	Pop() interface{}
 	Length()
 }
+
+func (node *Node) Push(data interface{}) {
+	newNode := Node{Data: data}
+	newNode.Next = node
+	node = &newNode
+}
