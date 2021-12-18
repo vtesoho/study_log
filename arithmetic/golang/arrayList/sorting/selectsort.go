@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func SelectSortMax(arr []int) int {
 	length := len(arr)
 	if length <= 1 {
@@ -20,7 +22,7 @@ func SelectSort(arr []int) []int {
 	if length <= 1 {
 		return arr
 	} else {
-		for i := 1; i < length-1; i++ {
+		for i := 0; i < length-1; i++ {
 			min := i
 			for j := i + 1; j < length; j++ {
 				if arr[min] < arr[j] {
@@ -31,10 +33,12 @@ func SelectSort(arr []int) []int {
 				arr[i], arr[min] = arr[min], arr[i]
 			}
 		}
-		return arr
 	}
+	return arr
 }
 
-func main1() {
+func main() {
 	arr := []int{1, 9, 7, 4, 2, 6, 4, 8, 3, 5}
+
+	fmt.Println("SelectSort", SelectSort(arr))
 }
