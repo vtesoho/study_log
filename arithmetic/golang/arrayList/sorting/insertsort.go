@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+//从右往左插入
 func insertsort(arr []int) []int {
 	length := len(arr)
 	if length <= 1 {
