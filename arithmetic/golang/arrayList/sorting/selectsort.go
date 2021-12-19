@@ -37,7 +37,7 @@ func SelectSort(arr []int) []int {
 	return arr
 }
 
-func main() {
+func main3() {
 	arr := []int{1, 9, 7, 4, 2, 6, 4, 8, 3, 5}
 
 	fmt.Println("SelectSort", SelectSort(arr))
