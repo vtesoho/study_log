@@ -13,7 +13,7 @@
 0x002d 00045 (main.go:7) MOVQ AX, "".a+8(SP)
 0x0032 00050 (main.go:7) MOVQ ""..autotmp_2+16(SP), AX
 0x0037 00055 (main.go:7) MOVQ AX, "".b(SP)
-红色字为交换部分，通过使用临时变量来存储实现。
+
 
 使用
 
