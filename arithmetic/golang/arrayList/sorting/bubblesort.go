@@ -21,7 +21,7 @@ func bubblesort(arr []int) []int {
 	}
 	for i := 0; i < length; i++ {
 		for j := i + 1; j < length; j++ {
-			if arr[i] > arr[j] {
+			if arr[i] < arr[j] {
 				arr[i], arr[j] = arr[j], arr[i]
 			}
 		}
@@ -30,7 +30,7 @@ func bubblesort(arr []int) []int {
 
 }
 
-func main() {
+func maina() {
 	arr := []int{9, 10, 7, 4, 2, 6, 4, 8, 3, 5}
 
 	fmt.Println("bubblesort", bubblesort(arr))
