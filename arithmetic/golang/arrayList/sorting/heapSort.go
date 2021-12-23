@@ -39,7 +39,7 @@ func HeapSortMax(arr []int, length int) []int {
 	}
 }
 
-func main() {
+func mainb() {
 	arr := []int{9, 10, 7, 4, 2, 6, 4, 8, 3, 5}
 	// fmt.Println("HeapSortMax", HeapSortMax(arr))
 	fmt.Println("HeapSort", HeapSort(arr))
