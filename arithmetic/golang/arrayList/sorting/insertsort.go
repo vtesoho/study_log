@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 //从右往左插入
-func insertsort(arr []int) []int {
+func Insertsort(arr []int) []int {
 	length := len(arr)
 	if length <= 1 {
 		return arr
@@ -26,5 +26,5 @@ func insertsort(arr []int) []int {
 
 func main5() {
 	arr := []int{9, 10, 7, 4, 2, 6, 4, 8, 3, 5}
-	fmt.Println("insertsort", insertsort(arr))
+	fmt.Println("insertsort", Insertsort(arr))
 }
