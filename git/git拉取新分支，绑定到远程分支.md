@@ -19,3 +19,12 @@ git branch --set-upstream-to=origin/newbranch
 ```
 git pull
 ```
+
+
+本地目录直接绑定git
+
+```
+git init
+git remote add origin <git地址>
+
+```
