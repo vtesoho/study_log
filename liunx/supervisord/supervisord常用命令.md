@@ -6,4 +6,3 @@ supervisorctl start es      //启动es
 supervisorctl restart       //重启es
 supervisorctl update        //配置文件修改后使用该命令加载新的配置
 supervisorctl reload        //重新启动配置中的所有程序
-supervisorctl reload        //重新启动配置中的所有程序
