@@ -22,3 +22,87 @@
 * 访问设备隔离与限制
 * 网络隔离与限制
 * 用户、用户组隔离限制
+
+
+* Docker_Host：
+  - 安装Docker的主机
+* Docker Daemon：
+  - 运行在Docker主机上的Docker后台进程
+* Client：
+  - 操作Docker主机的客户端（命令行、UI等）
+* Registry：
+  - 镜像仓库
+  - Docker Hub
+* Images：
+  - 镜像，带环境打包好的程序，可以直接启动运行
+* Containers：
+  - 容器，由镜像启动起来正在运行中的程序
+
+交互逻辑
+```
+装好Docker，然后去 软件市场 寻找镜像，下载并运行，查看容器状态日志等排错
+```
+
+
+## centos下安装docker
+
+### 1、移除以前docker相关包
+
+```
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+```
+
+### 2、配置yum源
+
+```
+sudo yum install -y yum-utils
+sudo yum-config-manager \
+--add-repo \
+http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
+
+
+### 3、安装docker
+
+```
+sudo yum install -y docker-ce docker-ce-cli containerd.io
+
+
+#以下是在安装k8s的时候使用
+yum install -y docker-ce-20.10.7 docker-ce-cli-20.10.7  containerd.io-1.4.6
+```
+
+
+### 4、启动
+
+```
+systemctl enable docker --now
+```
+
+
+
+### 5、配置加速
+
+```
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://82m9ar63.mirror.aliyuncs.com"],
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
