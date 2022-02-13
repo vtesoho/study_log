@@ -19,3 +19,26 @@ COPY target/*.jar   /app.jar
 
 ENTRYPOINT ["java","-jar","/app.jar"]
 ```
+
+## Dockerfile编译成image
+```
+docker build -t java-demo:v1.0 .
+```
+
+## 分享镜像
+```
+# 登录docker hub
+docker login
+
+#给旧镜像起名
+docker tag java-demo:v1.0  leifengyang/java-demo:v1.0
+
+# 推送到docker hub
+docker push leifengyang/java-demo:v1.0
+
+# 别的机器
+docker pull leifengyang/java-demo:v1.0
+
+# 别的机器运行
+docker run -d -p 8080:8080 --name myjava-app java-demo:v1.0 
+```
