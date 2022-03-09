@@ -65,3 +65,11 @@ innodb  myisam
 
 ## 死锁
 show engine innodb status
+
+
+
+## mysql 的qps  tps
+看配置，以阿里rds
+qps:9W
+tps:5K
+1T=18Q
