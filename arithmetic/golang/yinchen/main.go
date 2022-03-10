@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"yinchen/src/quicksort"
+	"yinchen/src/heapsort"
 )
 
 func main() {
 	// main1()
 	arr := []int{4, 8, 1, 9, 3, 7, 2, 5, 10}
 	// fmt.Println(shellsort.ShellSort(arr))
-	fmt.Println(quicksort.Quicksort2(arr))
+	fmt.Println(heapsort.HeapSort(arr))
 }
