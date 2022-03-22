@@ -34,6 +34,17 @@ func (node *Node) ListPrint() {
 		}
 	}
 }
+func (node *Node) ListPrinta() {
+	for {
+		ls := node.Data
+		fmt.Println(ls)
+		if node.Next != nil {
+			node = node.Next
+		} else {
+			break
+		}
+	}
+}
 
 func (node *Node) reverserList() {
 	pReversedHead := node
