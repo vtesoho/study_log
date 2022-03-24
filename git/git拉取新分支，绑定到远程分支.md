@@ -43,4 +43,10 @@ git config --global user.email "vtesoho@163.com"
 
 
 ## 生成密钥
+ssh-keygen -t rsa
+
+cat ~/.ssh/id_rsa.pub
+
+复制到gitlab  ssh上面
+
 
