@@ -23,3 +23,14 @@ kind: Namespace
 metadata:
     name: hello
 ```
+
+
+## pod
+
+查看default 名称空间pod
+```Bash
+kubectl get pod
+```
+
+查看某个pod的描述
+kubectl describe pod pod名字
