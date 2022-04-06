@@ -34,3 +34,6 @@ kubectl get pod
 
 查看某个pod的描述
 kubectl describe pod pod名字
+
+删除pod
+kubectl delete pod pod名字
