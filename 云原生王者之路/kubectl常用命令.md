@@ -102,3 +102,18 @@ spec:
 
 
 ### 扩缩容
+
+```
+kubectl scale --replicas=5 deployment/my-dep
+
+kubectl edit deployment my-dep
+
+#修改 replicas
+```
+
+
+### 3、自愈&故障转移
+● 停机
+● 删除Pod
+● 容器崩溃
+● ....
