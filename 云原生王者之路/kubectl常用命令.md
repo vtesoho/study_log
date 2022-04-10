@@ -132,8 +132,96 @@ kubectl edit deployment/my-dep
 ### 5、版本回退
 ```
 查看历史版本
-kubectl rollout history deployment/my-dep
+kubectl rollout history deploy/my-dep
+
+回到上次
+kubectl rollout undo deploy/my-dep
 
 回滚某个版本
 kubectl rollout undo deploy/my-dep --to-revision=1
+```
+
+
+
+
+## Service
+将一组pods公开为网络服务的抽象方法。
+
+```
+暴露deploy
+kubectl expose deployment my-dep --post=8000 --target-post=80
+集群内使用service的ip:port就可以负载均衡的访问
+
+
+使用标签检索pod
+kubectl get pod -l app=my-dep
+```
+
+
+
+
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: my-dep
+  name: my-dep
+spec:
+  selector:
+    app: my-dep
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 80
+```
+
+
+
+### ClusterIP
+```
+# 等同于没有--type的
+kubectl expose deployment my-dep --port=8000 --target-port=80 --type=ClusterIP
+```
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: my-dep
+  name: my-dep
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: my-dep
+  type: ClusterIP
+```
+
+
+### NodePort
+```
+kubectl expose deployment my-dep --port=8000 --target-port=80 --type=NodePort
+```
+
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: my-dep
+  name: my-dep
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: my-dep
+  type: NodePort
 ```
