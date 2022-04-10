@@ -117,3 +117,23 @@ kubectl edit deployment my-dep
 ● 删除Pod
 ● 容器崩溃
 ● ....
+
+
+### 4、滚动更新
+```
+kubectl set image deploy/my-dep nginx=nginx:1.16.1 --record
+kubectl rollout status deployment/my-dep
+```
+```yaml
+kubectl edit deployment/my-dep
+```
+
+
+### 5、版本回退
+```
+查看历史版本
+kubectl rollout history deployment/my-dep
+
+回滚某个版本
+kubectl rollout undo deploy/my-dep --to-revision=1
+```
