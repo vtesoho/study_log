@@ -1,6 +1,16 @@
-# kubectl常用命令
+## 2、Namespace
 
+```
+kubectl create ns hello
+kubectl delete ns hello
+```
 
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hello
+```
 创建名为hello的命名空间
 ```
 kubectl create ns hello
@@ -1081,4 +1091,71 @@ spec:
             name: nginx-demo
             port:
               number: 8000
+```
+
+
+## 7、存储抽象
+
+### 1、所有节点
+```
+#所有机器安装
+yum install -y nfs-utils
+```
+
+###  2、主节点
+```
+#nfs主节点
+echo "/nfs/data/ *(insecure,rw,sync,no_root_squash)" > /etc/exports
+
+mkdir -p /nfs/data
+systemctl enable rpcbind --now
+systemctl enable nfs-server --now
+#配置生效
+exportfs -r
+```
+
+
+### 3、从节点
+```
+showmount -e 172.31.0.4
+
+#执行以下命令挂载 nfs 服务器上的共享目录到本机路径 /root/nfsmount
+mkdir -p /nfs/data
+
+mount -t nfs 172.31.0.4:/nfs/data /nfs/data
+# 写入一个测试文件
+echo "hello nfs server" > /nfs/data/test.txt
+```
+
+
+### 4、原生方式数据挂载
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-pv-demo
+  name: nginx-pv-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-pv-demo
+  template:
+    metadata:
+      labels:
+        app: nginx-pv-demo
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+        - name: html
+          mountPath: /usr/share/nginx/html
+      volumes:
+        - name: html
+          nfs:
+            server: 172.31.0.4
+            path: /nfs/data/nginx-pv
 ```
