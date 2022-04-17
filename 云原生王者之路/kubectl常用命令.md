@@ -1159,3 +1159,108 @@ spec:
             server: 172.31.0.4
             path: /nfs/data/nginx-pv
 ```
+
+### 1、PV&PVC
+
+PV：持久卷（Persistent Volume），将应用需要持久化的数据保存到指定位置
+PVC：持久卷申明（Persistent Volume Claim），申明需要使用的持久卷规格
+
+#### 1、创建pv池
+```
+#nfs主节点
+mkdir -p /nfs/data/01
+mkdir -p /nfs/data/02
+mkdir -p /nfs/data/03
+```
+
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv01-10m
+spec:
+  capacity:
+    storage: 10M
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+  nfs:
+    path: /nfs/data/01
+    server: 172.31.0.4
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv02-1gi
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+  nfs:
+    path: /nfs/data/02
+    server: 172.31.0.4
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv03-3gi
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+  nfs:
+    path: /nfs/data/03
+    server: 172.31.0.4
+```
+
+### 2、PVC创建与绑定
+创建PVC
+
+```
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nginx-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 200Mi
+  storageClassName: nfs
+```
+
+创建Pod绑定PVC
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-deploy-pvc
+  name: nginx-deploy-pvc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-deploy-pvc
+  template:
+    metadata:
+      labels:
+        app: nginx-deploy-pvc
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+        - name: html
+          mountPath: /usr/share/nginx/html
+      volumes:
+        - name: html
+          persistentVolumeClaim:
+            claimName: nginx-pvc
+```
