@@ -1264,3 +1264,100 @@ spec:
           persistentVolumeClaim:
             claimName: nginx-pvc
 ```
+
+
+## 2、ConfigMap
+
+抽取应用配置，并且可以自动更新
+
+### 1、redis示例
+
+1、把之前的配置文件创建为配置集
+
+```
+# 创建配置，redis保存到k8s的etcd；
+kubectl create cm redis-conf --from-file=redis.conf
+```
+
+```yaml
+apiVersion: v1
+data:    #data是所有真正的数据，key：默认是文件名   value：配置文件的内容
+  redis.conf: |
+    appendonly yes
+kind: ConfigMap
+metadata:
+  name: redis-conf
+  namespace: default
+```
+
+2、创建Pod
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis
+spec:
+  containers:
+  - name: redis
+    image: redis
+    command:
+      - redis-server
+      - "/redis-master/redis.conf"  #指的是redis容器内部的位置
+    ports:
+    - containerPort: 6379
+    volumeMounts:
+    - mountPath: /data
+      name: data
+    - mountPath: /redis-master
+      name: config
+  volumes:
+    - name: data
+      emptyDir: {}
+    - name: config
+      configMap:
+        name: redis-conf
+        items:
+        - key: redis.conf
+          path: redis.conf
+```
+
+
+3、检查默认配置
+
+
+```
+kubectl exec -it redis -- redis-cli
+
+127.0.0.1:6379> CONFIG GET appendonly
+127.0.0.1:6379> CONFIG GET requirepass
+```
+
+
+4、修改ConfigMap
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-redis-config
+data:
+  redis-config: |
+    maxmemory 2mb
+    maxmemory-policy allkeys-lru 
+```
+
+5、检查配置是否更新
+
+```
+kubectl exec -it redis -- redis-cli
+
+127.0.0.1:6379> CONFIG GET maxmemory
+127.0.0.1:6379> CONFIG GET maxmemory-policy
+```
+
+检查指定文件内容是否已经更新
+修改了CM。Pod里面的配置文件会跟着变
+
+配置值未更改，因为需要重新启动 Pod 才能从关联的 ConfigMap 中获取更新的值。 
+原因：我们的Pod部署的中间件自己本身没有热更新能力
