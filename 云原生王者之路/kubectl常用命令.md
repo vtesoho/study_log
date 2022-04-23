@@ -1361,3 +1361,36 @@ kubectl exec -it redis -- redis-cli
 
 配置值未更改，因为需要重新启动 Pod 才能从关联的 ConfigMap 中获取更新的值。 
 原因：我们的Pod部署的中间件自己本身没有热更新能力
+
+
+### 3、Secret
+
+Secret 对象类型用来保存敏感信息，例如密码、OAuth 令牌和 SSH 密钥。 将这些信息放在 secret 中比放在 Pod 的定义或者 容器镜像 中来说更加安全和灵活。
+
+```
+kubectl create secret docker-registry leifengyang-docker \
+--docker-username=leifengyang \
+--docker-password=Lfy123456 \
+--docker-email=534096094@qq.com
+
+##命令格式
+kubectl create secret docker-registry regcred \
+  --docker-server=<你的镜像仓库服务器> \
+  --docker-username=<你的用户名> \
+  --docker-password=<你的密码> \
+  --docker-email=<你的邮箱地址>
+```
+
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: private-nginx
+spec:
+  containers:
+  - name: private-nginx
+    image: leifengyang/guignginx:v1.0
+  imagePullSecrets:
+  - name: leifengyang-docker
+```
