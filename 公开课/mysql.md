@@ -73,3 +73,127 @@ show engine innodb status
 qps:9W
 tps:5K
 1T=18Q
+
+
+
+
+
+事务的四大特点是什么？他们的实现原理是什么？
+
+ACID
+
+A 原子性  undolog 回滚日志
+C 一致性
+I 隔离性  MVCC  锁 
+D 持久性  redolog
+
+wal
+
+write ahead log  顺序读写，随机读写
+
+mysql的redolog,undolog,binlog分别有什么作用？
+
+什么是二阶段提交，如何保证宕机时数据的一致性？
+
+多主之间binlog同步
+
+
+先写redolog  -> prepare的状态 ，如果断电，会先去寻找prepare
+
+binlog -> redolog
+
+
+mvcc如何实现多版本并发控制？如何解决读写冲突？
+
+
+
+
+mysql中的幻读是什么？如何解决幻读问题？
+
+
+
+
+
+
+
+
+数据库支持的并发有几种情况
+
+读读
+
+不存在任何问题，也不需要并发控制
+
+读写
+
+有数据安全问题，会出现脏读，幻读，不可重复读  - mvcc
+
+
+当前读  
+
+读取的是数据最新版本，而且要保证其它并发事务不能修改当前记录
+
+lock in share mode ,for update, update,delete,insert  会触
+
+
+
+快照读  不加锁的非阻塞读，读取的是历史版本的数据，不是最新的记录
+
+不加锁的select  会触
+
+
+写写
+
+有数据安全问题，会存在丢失更新问题   - 锁 
+
+
+
+
+client(cli,jdbc,navicat)
+
+
+server
++ 连接器-》管理连接，验证权限
++ 分析器-》词法分析，语法分析-》AST(antlr,calcite)
++ 优化器-》CBO成本优化，RBO规则 
++ 执行器-》蹑存储引擎交互 
+
+存储引擎
+不同的的数据文件在磁盘的不同组织形式
+innodb
+myisam
+memory
+
+
+
+
+
+
+这四个日志位于server层面，跟存储引擎无关
+
+errorlog 错误日志
+
+binlog 主从复制日志
+
+slowlog 慢日志
+
+relaylog 中继日志
+
+
+属于innodb存储引擎，其它存储引擎是不包含这两个日志的
+
+undolog 回滚日志
+
+redolog 前滚日志
+
+
+
+
+
+
+
+
+
+
+
+
+
