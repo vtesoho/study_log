@@ -10,5 +10,5 @@ func main() {
 	// fmt.Println(shellsort.ShellSort(arr))
 	// fmt.Println(heapsort.HeapSort(arr))
 	// fmt.Println(oddevensort.Oddevensort(arr))
-	selectsort.Selectsort(arr)
+	selectsort.SelectsortA(arr)
 }
