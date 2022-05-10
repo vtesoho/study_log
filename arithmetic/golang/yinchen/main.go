@@ -1,6 +1,9 @@
 package main
 
-import "yinchen/src/selectsort"
+import (
+	"fmt"
+	"yinchen/src/insertsort"
+)
 
 // "yinchen/src/oddevensort"
 
@@ -10,5 +13,5 @@ func main() {
 	// fmt.Println(shellsort.ShellSort(arr))
 	// fmt.Println(heapsort.HeapSort(arr))
 	// fmt.Println(oddevensort.Oddevensort(arr))
-	selectsort.SelectsortA(arr)
+	fmt.Println(insertsort.Insertsort(arr))
 }
