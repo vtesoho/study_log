@@ -4,4 +4,5 @@
 
 ```
 netstat -natp
+netstat -lntp
 ```
