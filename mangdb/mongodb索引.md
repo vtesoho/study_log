@@ -15,3 +15,7 @@
 精确（equal)匹配的字段放最前面
 排序（sort)条件放中间
 范围(range)匹配字段放最后面
+
+
+创建索引最后量用background:true
+
