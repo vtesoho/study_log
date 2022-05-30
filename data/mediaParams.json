@@ -1,0 +1,132 @@
+db.getCollection("mediaParams").insert( {
+    key: "haveSelfMedia",
+    type: "radio",
+    where: [
+        {"name":"有","value":"1"},{"name":"无","value":"0"}
+    ],
+    desc: "有无自媒体",
+    range: "有无自媒体",
+    select: [ ]
+});
+
+db.getCollection("mediaParams").insert( {
+    key: "haveOrganWeibo",
+    type: "radio",
+    where: [
+        {"name":"有","value":"1"},{"name":"无","value":"0"}
+    ],
+    desc: "有无机构微博",
+    range: "有无机构微博",
+    select: [ ]
+});
+
+
+db.getCollection("mediaParams").insert( {
+    key: "haveWeichatPublic",
+    type: "radio",
+    where: [
+        {"name":"有","value":"1"},{"name":"无","value":"0"}
+    ],
+    desc: "有无微信公众号",
+    range: "有无微信公众号",
+    select: [ ]
+});
+
+db.getCollection("mediaParams").insert( {
+    key: "haveNews",
+    type: "radio",
+    where: [
+        {"name":"有","value":"1"},{"name":"无","value":"0"}
+    ],
+    desc: "有无新闻",
+    range: "有无新闻",
+    select: [ ]
+});
+
+db.getCollection("mediaParams").insert( {
+    key: "selfMediaName",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "自媒体名称",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+db.getCollection("mediaParams").insert( {
+    key: "organWeiboName",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "机构微博名称",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+db.getCollection("mediaParams").insert( {
+    key: "haveWeichatPublic",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "有无微信公众号",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+db.getCollection("mediaParams").insert( {
+    key: "lastMonthNewsNum",
+    type: "array",
+    where: [
+        {"name":"包含任意一个","value":"in"},
+        {"name":"不包含所有","value":"nin"}
+    ],
+    desc: "近一月新闻数量",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+db.getCollection("mediaParams").insert( {
+    key: "organWeiboNum",
+    type: "range",
+    where: [
+        {"name":"gte","value":0},
+        {"name":"lte","value":0}
+    ],
+    unit:"个", 
+    desc: "机构微博个数",
+    range: "不超过10个数字，最小值应该小于等于最大值",
+    select: []
+});
+
+
+db.getCollection("mediaParams").insert( {
+    key: "weichatPublicNum",
+    type: "range",
+    where: [
+        {"name":"gte","value":0},
+        {"name":"lte","value":0}
+    ],
+    unit:"个", 
+    desc: "微信公众号个数",
+    range: "不超过10个数字，最小值应该小于等于最大值",
+    select: []
+});
+
+db.getCollection("mediaParams").insert( {
+    key: "lastMonthNewsNum",
+    type: "range",
+    where: [
+        {"name":"gte","value":0},
+        {"name":"lte","value":0}
+    ],
+    unit:"条", 
+    desc: "近一月新闻数量",
+    range: "不超过10个数字，最小值应该小于等于最大值",
+    select: []
+});

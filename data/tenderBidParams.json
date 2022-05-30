@@ -1,0 +1,84 @@
+db.getCollection("tenderBidParams").insert( {
+    key: "haveTenderAndBid",
+    type: "radio",
+    where: [
+        {"name":"有","value":"1"},{"name":"无","value":"0"}
+    ],
+    desc: "是否有招投标",
+    range: "是否有招投标",
+    select: [ ]
+});
+
+db.getCollection("tenderBidParams").insert( {
+    key: "haveTender",
+    type: "radio",
+    where: [
+        {"name":"有","value":"1"},{"name":"无","value":"0"}
+    ],
+    desc: "是否有招标",
+    range: "是否有招标",
+    select: [ ]
+});
+
+db.getCollection("tenderBidParams").insert( {
+    key: "haveWinningBid",
+    type: "radio",
+    where: [
+        {"name":"有","value":"1"},{"name":"无","value":"0"}
+    ],
+    desc: "是否有中标",
+    range: "是否有中标",
+    select: [ ]
+});
+
+
+
+
+db.getCollection("tenderBidParams").insert( {
+    key: "tenderKeywords",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "招标信息关键字",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+db.getCollection("tenderBidParams").insert( {
+    key: "winningBidKeywords",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "中标信息关键字",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+db.getCollection("tenderBidParams").insert( {
+    key: "tenderInfoPublishTime",
+    type: "daterange",
+    where: [
+             {"name":"gte","value":""},
+             {"name":"lte","value":""}
+         ],
+    desc: "招标信息发布时间",
+    range: "招标信息发布时间",
+    select: []
+ });
+
+
+ db.getCollection("tenderBidParams").insert( {
+    key: "winningBidInfoPublishTime",
+    type: "daterange",
+    where: [
+             {"name":"gte","value":""},
+             {"name":"lte","value":""}
+         ],
+    desc: "中标信息发布时间",
+    range: "中标信息发布时间",
+    select: []
+ });

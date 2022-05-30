@@ -1,0 +1,127 @@
+db.getCollection("eCommerceParams").insert( {
+    key: "haveGoods",
+    type: "radio",
+    where: [
+        {"name":"有","value":"1"},{"name":"无","value":"0"}
+    ],
+    desc: "有无商品",
+    range: "有无商品",
+    select: [ ]
+});
+
+
+
+
+db.getCollection("eCommerceParams").insert( {
+    key: "eCommerceProducts",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "电商主营产品名称",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+db.getCollection("eCommerceParams").insert( {
+    key: "eCommerceProductsTypeNme",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "电商产品分类名称",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+db.getCollection("eCommerceParams").insert( {
+    key: "eCommerceShopName",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "电商店铺名称",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+db.getCollection("eCommerceParams").insert( {
+    key: "eCommerceBrandName",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "电商主营品牌名称",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+
+
+db.getCollection("eCommerceParams").insert( {
+    key: "eCommerceShopNum",
+    type: "range",
+    where: [
+        {"name":"gte","value":0},
+        {"name":"lte","value":0}
+    ],
+    unit:"个", 
+    desc: "电商店铺数量",
+    range: "不超过10个数字，最小值应该小于等于最大值",
+    select: []
+});
+
+
+db.getCollection("eCommerceParams").insert( {
+    key: "eCommerceShopAverageScore",
+    type: "range",
+    where: [
+        {"name":"gte","value":0},
+        {"name":"lte","value":0}
+    ],
+    unit:"个", 
+    desc: "电商店铺平均分",
+    range: "0-10",
+    select: []
+});
+
+db.getCollection("eCommerceParams").insert( {
+    key: "eCommerceShopGoodsNum",
+    type: "range",
+    where: [
+        {"name":"gte","value":0},
+        {"name":"lte","value":0}
+    ],
+    unit:"个", 
+    desc: "电商店铺商品总数",
+    range: "不超过10个数字，最小值应该小于等于最大值",
+    select: []
+});
+
+db.getCollection("eCommerceParams").insert( {
+    key: "eCommerceShopPlatform",
+    type: "array",
+    where: [
+             {"name":"等于任意一个","value":"eq"},
+             {"name":"不等于所有","value":"neq"}
+         ],
+    desc: "电商上架平台",
+    range: "电商上架平台",
+    select: [{"name":"京东","value":"京东"},{"name":"苏宁","value":"苏宁"},{"name":"淘宝","value":"淘宝"},{"name":"国美","value":"国美"},{"name":"蘑菇街","value":"蘑菇街"},{"name":"唯品会：","value":"唯品会："},{"name":"拼多多：","value":"拼多多："},{"name":"1号店：","value":"1号店："},{"name":"亚马逊（中国）","value":"亚马逊（中国）"}]
+});
+
+db.getCollection("eCommerceParams").insert( {
+    key: "eCommerceShopCreateTime",
+    type: "daterange",
+    where: [
+             {"name":"gte","value":""},
+             {"name":"lte","value":""}
+         ],
+    desc: "电商店铺创建时间",
+    range: "电商店铺创建时间",
+    select: []
+ });

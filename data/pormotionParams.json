@@ -1,0 +1,101 @@
+db.getCollection("pormotionParams").insert( {
+    key: "havePormotion",
+    type: "radio",
+    where: [
+        {"name":"有","value":"1"},{"name":"无","value":"0"}
+    ],
+    desc: "有无推广",
+    range: "有无推广",
+    select: [ ]
+});
+
+
+db.getCollection("pormotionParams").insert( {
+    key: "selfMediaName",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "自媒体名称",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+db.getCollection("pormotionParams").insert( {
+    key: "promotionCopywriting",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "推广文案",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+db.getCollection("pormotionParams").insert( {
+    key: "pormotionKeywords",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "推广关键词",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+
+
+db.getCollection("pormotionParams").insert( {
+    key: "pormotionKeywordsNum",
+    type: "range",
+    where: [
+        {"name":"gte","value":0},
+        {"name":"lte","value":0}
+    ],
+    unit:"个", 
+    desc: "推广关键词数",
+    range: "不超过10个数字，最小值应该小于等于最大值",
+    select: []
+});
+
+
+db.getCollection("pormotionParams").insert( {
+    key: "pormotionCompetitorNum",
+    type: "range",
+    where: [
+        {"name":"gte","value":0},
+        {"name":"lte","value":0}
+    ],
+    unit:"个", 
+    desc: "推广竞品数",
+    range: "不超过10个数字，最小值应该小于等于最大值",
+    select: []
+});
+
+db.getCollection("pormotionParams").insert( {
+    key: "promotionLinkNum",
+    type: "range",
+    where: [
+        {"name":"gte","value":0},
+        {"name":"lte","value":0}
+    ],
+    unit:"个", 
+    desc: "推广链接数",
+    range: "不超过10个数字，最小值应该小于等于最大值",
+    select: []
+});
+
+db.getCollection("pormotionParams").insert( {
+    key: "pormotionChannel",
+    type: "array",
+    where: [
+             {"name":"等于任意一个","value":"eq"},
+             {"name":"不等于所有","value":"neq"}
+         ],
+    desc: "推广平台",
+    range: "推广平台",
+    select: [{"name":"百度","value":"百度"},{"name":"360","value":"360"}]
+});

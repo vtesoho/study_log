@@ -1,0 +1,125 @@
+db.getCollection("abnormalOperationParams").insert( {
+    key: "haveAbnormalOperation",
+    type: "radio",
+    where: [
+        {"name":"有","value":"1"},{"name":"无","value":"0"}
+    ],
+    desc: "有无经营异常",
+    range: "有无经营异常",
+    select: [ ]
+});
+
+db.getCollection("abnormalOperationParams").insert( {
+    key: "haveAbnormalOperationPresent",
+    type: "radio",
+    where: [
+        {"name":"是","value":"1"},{"name":"否","value":"0"}
+    ],
+    desc: "目前是否被列入经营异常",
+    range: "目前是否被列入经营异常",
+    select: [ ]
+});
+
+db.getCollection("abnormalOperationParams").insert( {
+    key: "haveAdministrativePenalties",
+    type: "radio",
+    where: [
+        {"name":"有","value":"1"},{"name":"无","value":"0"}
+    ],
+    desc: "有无行政处罚",
+    range: "有无行政处罚",
+    select: [ ]
+});
+
+
+
+
+db.getCollection("abnormalOperationParams").insert( {
+    key: "abnormalOperationReason",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "列入经营异常的原因",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+db.getCollection("abnormalOperationParams").insert( {
+    key: "administrativePenaltiesType",
+    type: "array",
+    where: [
+             {"name":"包含任意一个","value":"in"},
+             {"name":"不包含所有","value":"nin"}
+         ],
+    desc: "违法行为类型",
+    range: "最多添加10个条件，每个条件字符不超过10个",
+    select: []
+});
+
+
+
+db.getCollection("abnormalOperationParams").insert( {
+    key: "moveInAbnormalOperationTime",
+    type: "daterange",
+    where: [
+             {"name":"gte","value":""},
+             {"name":"lte","value":""}
+         ],
+    desc: "最近经营异常列入日期",
+    range: "最近经营异常列入日期",
+    select: []
+ });
+
+
+ db.getCollection("abnormalOperationParams").insert( {
+    key: "moveOutAbnormalOperationTime",
+    type: "daterange",
+    where: [
+             {"name":"gte","value":""},
+             {"name":"lte","value":""}
+         ],
+    desc: "最近经营异常移出日期",
+    range: "最近经营异常移出日期",
+    select: []
+ });
+
+ db.getCollection("abnormalOperationParams").insert( {
+    key: "administrativePenaltiesTime",
+    type: "daterange",
+    where: [
+             {"name":"gte","value":""},
+             {"name":"lte","value":""}
+         ],
+    desc: "最近行政处罚公示日期",
+    range: "最近行政处罚公示日期",
+    select: []
+ });
+
+
+ db.getCollection("abnormalOperationParams").insert( {
+    key: "abnormalOperationNum",
+    type: "range",
+    where: [
+        {"name":"gte","value":0},
+        {"name":"lte","value":0}
+    ],
+    unit:"个", 
+    desc: "经营异常的数量",
+    range: "不超过10个数字，最小值应该小于等于最大值",
+    select: []
+});
+
+db.getCollection("abnormalOperationParams").insert( {
+    key: "administrativePenaltiesNum",
+    type: "range",
+    where: [
+        {"name":"gte","value":0},
+        {"name":"lte","value":0}
+    ],
+    unit:"个", 
+    desc: "行政处罚数量",
+    range: "不超过10个数字，最小值应该小于等于最大值",
+    select: []
+});
