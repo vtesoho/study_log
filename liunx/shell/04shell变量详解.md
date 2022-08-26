@@ -53,3 +53,85 @@ b、变量名与内存空间关系：计算机中会将对应的内存空间地�
 ```
 
 
+## 二、变量定义
+
+2.1、什么时候需要定义变量？
+
+如果某个内容需要多次使用，并且在代码中重复出现，那么可以用变量代表该内容。这样在修改内容的时候，仅仅需要修改变量的值。
+
+在代码运作的过程中，可能会把某些命令的执行结果保存起来，后续代码需要使用这些结果，就可以直接使用这个变量。
+
+2.2、定义一个变量
+
+变量格式： 变量名=值
+
+在shell编程中的变量名和等号之间不能有空格。
+```
+变量名命名规则：
+    命名只能使用英文字母，数字和下划线，首个字符不能以数字开头。
+    中间不能有空格，可以使用下划线（_）。
+    不能使用标点符号。
+    不能使用bash里的关键字（可用help命令查看保留关键字）。
+
+定义变量举例：
+VAR1=1
+age=18 整形
+name=‘baism’ 字符串
+score=88.8 浮点
+
+
+注意：字符串要用单引号或双引号引起来
+建议变量名为大写，和命令区分
+			_name
+
+```
+
+
+```
+变量赋值，此种方法设置为本地变量
+[root@zutuanxue ~]# name="baism"
+[root@zutuanxue ~]# school='ayitula'
+[root@zutuanxue ~]# age=30
+[root@zutuanxue ~]# score=88.8
+```
+
+
+2.3、取消变量 unset
+
+```
+取消当前环境中的变量，如果是变量设置是保存在文件中，下次重启又会恢复
+[root@zutuanxue ~]# unset name
+[root@zutuanxue ~]# echo $name
+```
+
+
+2.4、 有类型变量 declare
+
+-i 将变量看成整数
+-r 使变量只读 readonly,该变量的值无法改变，并且不能为unset
+-x 标记变量通过环境导出 export
+-a 指定为索引数组（普通数组）；查看普通数组
+-A 指定为关联数组；查看关联数组
+
+```
+[root@zutuanxue ~]# declare -i num='asa'
+[root@zutuanxue ~]# echo $num
+0
+[root@zutuanxue ~]# num=100
+[root@zutuanxue ~]# echo $num
+100
+[root@zutuanxue ~]# declare -r num
+[root@zutuanxue ~]# echo $num
+100
+[root@zutuanxue~]# num=200
+-bash: num: 只读变量
+
+[root@zutuanxue ~]# declare -x
+declare -x HISTCONTROL="ignoredups"
+declare -x HISTSIZE="1000"
+declare -x HOME="/root"
+declare -x HOSTNAME="Bai_Shuming"
+declare -x LANG="zh_CN.UTF-8"
+declare -x LESSOPEN="||/usr/bin/lesspipe.sh %s"
+
+```
