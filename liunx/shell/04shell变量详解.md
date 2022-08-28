@@ -270,3 +270,71 @@ c
 ======我是分割线=======
 a b c
 ```
+
+
+变量总结说明：
+
+本地变量：当前用户自定义的变量。当前进程中有效，其他进程及当前进程的子进程无效。
+
+环境变量：当前进程有效，并且能够被子进程调用。
+
+全局变量：全局所有的用户和程序都能调用，且继承，新建的用户也默认能调用.
+
+内置变量：shell本身已经固定好了它的名字和作用.
+
+
+变量类型|作用域|生命周期
+--|--|--
+本地变量|当前shell环境(子shell不能用)|脚本结束或终端结束
+环境变量|当前shell或者子shell|当前进程结束
+全局变量|所有用户及shell环境|关机
+内置变量|所有用户及shell环境|关机
+
+### 四、变量取值
+```
+变量内容读出
+[root@zutuanxue ~]# echo $name
+baism
+[root@zutuanxue ~]# echo $school
+ayitula
+[root@zutuanxue ~]# echo $age
+30
+[root@zutuanxue ~]# echo $score
+88.8
+
+
+变量读取过程中，默认单引号是不解释变量的.比如
+[root@zutuanxue ~]# echo '$name'
+$name
+
+如果必须使用单引号还要读取变量的值可以使用eval命令[重新运算求出参数的内容] 
+[root@zutuanxue ~]# eval  echo '$name'
+baism
+```
+
+
+### 五、其他变量（扩展）
+
+```
+1）取出一个目录下的目录和文件：dirname和 basename 
+2）变量"内容"的删除和替换
+一个“%”代表从右往左去掉一个/key/
+两个“%%”代表从右往左最大去掉/key/
+一个“#”代表从左往右去掉一个/key/
+两个“##”代表从左往右最大去掉/key/
+
+# A=/root/Desktop/shell/mem.txt 
+# echo $A
+/root/Desktop/shell/mem.txt
+# dirname $A   取出目录
+/root/Desktop/shell
+# basename $A  取出文件
+mem.txt
+
+# url=www.taobao.com
+# echo ${#url}      获取变量的长度
+# echo ${url#*.}       以分隔符.界限  *匹配所有
+# echo ${url##*.}
+# echo ${url%.*}
+# echo ${url%%.*}
+```
