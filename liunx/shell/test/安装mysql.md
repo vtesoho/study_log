@@ -1,5 +1,8 @@
 # 安装mysql
 
+
+https://dev.mysql.com/
+
 ```shell
 rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
 
