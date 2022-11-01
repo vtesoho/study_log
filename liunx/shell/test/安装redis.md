@@ -33,3 +33,30 @@ systemctl enable redis.service   #设置开机自启动
 
 systemctl disable redis.service   #停止开机自启动
 ```
+
+
+
+vi /etc/systemd/system/redis.service
+
+
+[Unit]
+Description=redis-server
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/redis/bin/redis-server /usr/local/redis/bin/redis.conf
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
+:wq
+
+systemctl daemon-reload
+
+systemctl start redis.service
+
+systemctl enable redis.service
+
+ln -s /usr/local/redis/bin/redis-cli /usr/bin/redis
