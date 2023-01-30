@@ -5,11 +5,11 @@ http://download.redis.io/releases/
 
 ```shell
 #!/bin/bash
-wget http://download.redis.io/releases/redis-7.0.5.tar.gz
+wget http://download.redis.io/releases/redis-7.0.8.tar.gz
 
-tar -zxvf redis-7.0.5.tar.gz
+tar -zxvf redis-7.0.8.tar.gz
 
-cd redis-7.0.5
+cd redis-7.0.8
 
 make
 
