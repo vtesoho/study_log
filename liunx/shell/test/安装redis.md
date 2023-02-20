@@ -15,8 +15,7 @@ make
 
 make install PREFIX=/usr/local/redis
 
-cp /root/tools/redis-7.0.8/redis.conf /usr/local/redis/bin/
-
+cp /root/redis-7.0.8/redis.conf /usr/local/redis/bin/
 
 ```
 服务操作命令
