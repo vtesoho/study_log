@@ -2,7 +2,7 @@
 
 
 ```
-yum install supervisor
+yum install -y supervisor
 
 supervisord -c /etc/supervisord.conf
 ```

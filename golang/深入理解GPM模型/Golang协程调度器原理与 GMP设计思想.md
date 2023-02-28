@@ -113,3 +113,7 @@ hand off机制
 抢占 在coroutine中要等待⼀个协程主动让出CPU才执⾏下⼀个协程，在Go
 中，⼀个goroutine最多占⽤CPU 10ms，防⽌其他goroutine被饿死.
 全局G队列 当M执⾏work stealing从其他P偷不到G时，它可以从全局G队列获取G。
+
+
+## (3) “go func()” 经历了什么过程
+
