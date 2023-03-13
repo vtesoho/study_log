@@ -10,8 +10,18 @@ wget https://repo.mysql.com//mysql80-community-release-el7-7.noarch.rpm
 
 rpm -ivh mysql80-community-release-el7-7.noarch.rpm
 
+yum install mysql-community-server
+
+systemctl start mysqld
+
+systemctl enable mysqld
+
 ```
 
+查看初始密码
+```
+grep 'temporary password' /var/log/mysqld.log
+```
 
 
 mysql 目录	说明
