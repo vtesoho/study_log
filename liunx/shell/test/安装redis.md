@@ -5,17 +5,17 @@ http://download.redis.io/releases/
 
 ```shell
 #!/bin/bash
-wget http://download.redis.io/releases/redis-7.0.8.tar.gz
+wget http://download.redis.io/releases/redis-7.0.9.tar.gz
 
-tar -zxvf redis-7.0.8.tar.gz
+tar -zxvf redis-7.0.9.tar.gz
 
-cd redis-7.0.8
+cd redis-7.0.9
 
 make
 
 make install PREFIX=/usr/local/redis
 
-cp /root/redis-7.0.8/redis.conf /usr/local/redis/bin/
+cp /root/redis-7.0.9/redis.conf /usr/local/redis/bin/
 
 ```
 服务操作命令
