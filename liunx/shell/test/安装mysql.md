@@ -4,6 +4,7 @@
 https://dev.mysql.com/
 
 ```shell
+#!/bin/bash
 rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
 
 wget https://repo.mysql.com//mysql80-community-release-el7-7.noarch.rpm
