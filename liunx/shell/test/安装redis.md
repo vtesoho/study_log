@@ -9,13 +9,13 @@ wget http://download.redis.io/releases/redis-7.0.9.tar.gz
 
 tar -zxvf redis-7.0.9.tar.gz
 
-cd /root/vs/redis-7.0.9
+cd /root/redis-7.0.9
 
 make
 
 make install PREFIX=/usr/local/redis
 
-cp /root/vs/redis-7.0.9/redis.conf /usr/local/redis/bin/
+cp /root/redis-7.0.9/redis.conf /usr/local/redis/bin/
 
 ```
 服务操作命令
