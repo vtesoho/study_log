@@ -14,6 +14,8 @@ src/lua -v
 
 cd haproxy-2.7.5/
 
+yum -y install gcc openssl-devel pcre-devel systemd-devel
+
 make ARCH=x86_64 TARGET=linux-glibc USE_PCRE=1 USE_OPENSSL=1 USE_ZLIB=1 USE_SYSTEMD=1 USE_LUA=1 LUA_INC=/usr/local/src/lua-5.4.4/src/ LUA_LIB=/usr/local/src/lua-5.4.4/src/
 
 
