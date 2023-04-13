@@ -5,6 +5,10 @@
 yum install -y supervisor
 
 supervisord -c /etc/supervisord.conf
+
+systemctl start supervisord
+
+systemctl enable supervisord
 ```
 
 ## 配置文件

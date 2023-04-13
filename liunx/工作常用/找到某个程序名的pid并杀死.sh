@@ -17,6 +17,7 @@ fi
 
 # 杀死进程
 kill ps aux | grep $program_name | awk '{print $2}
+kill $(ps aux | grep maintest | awk '{print $2}')
 
 # 输出操作结果
 if [ $? -eq 0 ]
