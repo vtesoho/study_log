@@ -64,6 +64,19 @@ done
 
 ```bash
 #!/bin/bash
+
+wget http://download.redis.io/releases/redis-7.0.9.tar.gz
+
+tar -zxvf redis-7.0.9.tar.gz
+
+cd /root/redis-7.0.9
+
+make
+
+make install PREFIX=/usr/local/redis
+
+sleep 1s
+
 i = 48478
 
 mkdir /root/redis_data

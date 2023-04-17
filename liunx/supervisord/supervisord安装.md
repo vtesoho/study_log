@@ -9,6 +9,17 @@ supervisord -c /etc/supervisord.conf
 systemctl start supervisord
 
 systemctl enable supervisord
+
+
+
+yum install epel-release
+yum install -y supervisor
+systemctl enable supervisord # 开机自启动
+systemctl start supervisord # 启动supervisord服务
+systemctl status supervisord # 查看supervisord服务状态
+ps -ef|grep supervisord # 查看是否存在supervisord进程
+
+supervisorctl status 查看状态
 ```
 
 ## 配置文件
