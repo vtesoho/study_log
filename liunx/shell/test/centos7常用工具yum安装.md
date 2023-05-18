@@ -37,6 +37,9 @@ yum install -y python-pip
 13、安装rpmbuild命令
 yum install -y rpm-build
 
+14 ab测试工具
+yum -y install apr-util
+
 yum卸载命令
 yum erase 安装包名称
 
@@ -128,4 +131,6 @@ yum install kernel-headers kernel-devel
 
 yum install -y psmisc
 yum install -y lrzsz
+
+
 ```
