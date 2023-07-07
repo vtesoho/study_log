@@ -133,4 +133,9 @@ yum install -y psmisc
 yum install -y lrzsz
 
 
+
+抓包安装
+yum install tcpdump
+
+
 ```
