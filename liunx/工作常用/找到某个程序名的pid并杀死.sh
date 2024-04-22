@@ -6,7 +6,7 @@ go build
 program_name="maintest"
 
 # 查找PID
-pid=$(ps aux | grep $program_name | awk '{print $2}')
+pid=$(ps aux | grep -v grep | grep $program_name | awk '{print $2}')
 
 # 判断PID是否存在，如果不存在则退出
 if [ -z $pid ]
